@@ -1,0 +1,18 @@
+package com.developer.b;
+
+import org.springframework.web.reactive.function.client.WebClient;
+
+abstract class AbstractFlowController {
+	
+	private static final String SERVICE_B = "service_b";
+	private final WebClient webClient;
+	private final ServicesConfig servicesConfig;
+	
+	public AbstractFlowController(WebClient webClient, ServicesConfig servicesConfig) {
+		this.webClient = webClient;
+		this.servicesConfig = servicesConfig;
+	}
+	
+	
+
+}

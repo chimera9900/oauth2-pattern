@@ -1,0 +1,8 @@
+package com.developer.ui;
+
+import org.springframework.web.bind.annotation.ControllerAdvice;
+
+@ControllerAdvice
+public class DefaultControllerAdvice {
+
+}

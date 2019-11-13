@@ -1,0 +1,5 @@
+package com.developer.b;
+
+public class ServiceCallResponse {
+
+}

@@ -1,0 +1,25 @@
+package com.developer.ui;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
+import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+
+@ControllerAdvice
+public class DefaultControllerAdvice {
+	
+	private ClientRegistrationRepository clientRegistrationRepository;
+	private OAuth2AuthorizedClientService authorizedClientService;
+	
+	@Autowired
+	public DefaultControllerAdvice(ClientRegistrationRepository clientRegistrationRepository,
+			OAuth2AuthorizedClientService authorizedClientService) {
+		this.clientRegistrationRepository = clientRegistrationRepository;
+		this.authorizedClientService = authorizedClientService;
+	}
+	
+	
+	
+	
+
+}

@@ -1,0 +1,42 @@
+package com.developer.ui;
+
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
+import org.springframework.security.oauth2.client.annotation.RegisteredOAuth2AuthorizedClient;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.reactive.function.client.WebClient;
+
+@Controller
+@RestController("/flow-a")
+public class FlowAController extends AbstractFlowController {
+	
+
+	public FlowAController(WebClient webClient, ServicesConfig servicesConfig) {
+		super(webClient, servicesConfig);
+	}
+	
+	@GetMapping
+	public String flowA(@RegisteredOAuth2AuthorizedClient("client-a") OAuth2AuthorizedClient clientA,
+			OAuth2AuthenticationToken token,
+			HttpServletRequest request,
+			Map<String,Object> model
+			) {
+		
+		ServiceCallResponse serviceACallResponse = callService(ServicesConfig.SERVICE_A, clientA);
+		
+		model.put("flowACall", fromUiApp(oauth2Authentication, request, serviceACallResponse));
+		model.put("flowActive", true);
+
+		return "index";
+		
+	}
+	
+	
+
+}

@@ -1,0 +1,21 @@
+package com.developer.ui;
+
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
+
+public class AuthorizedClientModel {
+	
+	private final OAuth2AuthorizedClient authorizedClient;
+
+	public AuthorizedClientModel(OAuth2AuthorizedClient authorizedClient) {
+		this.authorizedClient = authorizedClient;
+	}
+	
+	public String getClientId() {
+		return getAuthorizedClient()authorizedClient.getClientRegistration().getClientId();
+	}
+
+	public OAuth2AuthorizedClient getAuthorizedClient() {
+		return authorizedClient;
+	}
+
+}

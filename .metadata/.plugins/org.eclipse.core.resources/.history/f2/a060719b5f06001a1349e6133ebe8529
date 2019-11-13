@@ -1,0 +1,28 @@
+package com.developer.b;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
+import org.springframework.security.oauth2.client.annotation.RegisteredOAuth2AuthorizedClient;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
+import org.springframework.web.reactive.function.client.WebClient;
+
+abstract class AbstractFlowController {
+	
+	private static final String SERVICE_B = "service_b";
+	private final WebClient webClient;
+	private final ServicesConfig servicesConfig;
+	
+	public AbstractFlowController(WebClient webClient, ServicesConfig servicesConfig) {
+		this.webClient = webClient;
+		this.servicesConfig = servicesConfig;
+	}
+	
+	public ServiceCallResponse callService(@RegisteredOAuth2AuthorizedClient("client-c") OAuth2AuthorizedClient clientC,
+			HttpServletRequest request, 
+			JwtAuthenticationToken token
+			)
+	
+	
+
+}

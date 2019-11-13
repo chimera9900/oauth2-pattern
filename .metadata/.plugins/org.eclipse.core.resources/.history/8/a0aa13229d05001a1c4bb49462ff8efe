@@ -1,0 +1,23 @@
+package com.developer.ui;
+
+import java.util.Map;
+
+import org.springframework.boot.context.properties.ConfigurationProperties;
+
+import lombok.Data;
+
+@ConfigurationProperties("oauth2.resource")
+public class ServicesConfig {
+	
+	private static final String ui_app = "UI-APP";
+	private static final String service_a = "SERVICE-A";
+	private static final String service_b = "SERVICE-B";
+	private Map<String,ServiceConfig> services;
+	
+	@Data
+	class ServiceConfig{
+		private String uri;
+		
+	}
+
+}

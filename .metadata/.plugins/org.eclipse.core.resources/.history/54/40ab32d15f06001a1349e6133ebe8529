@@ -1,0 +1,33 @@
+package com.developer.b;
+
+import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.web.reactive.function.client.WebClient;
+
+import com.developer.b.ServicesConfig.ServiceConfig;
+
+abstract class AbstractFlowController {
+	
+	private static final String SERVICE_B = "service_b";
+	private final WebClient webClient;
+	private final ServicesConfig servicesConfig;
+	
+	public AbstractFlowController(WebClient webClient, ServicesConfig servicesConfig) {
+		this.webClient = webClient;
+		this.servicesConfig = servicesConfig;
+	}
+	
+	public ServiceCallResponse callService(Jwt jwt) {
+		ServiceConfig config = servicesConfig.getConfig(ServicesConfig.SERVICE_C);
+		return webClient
+				.get()
+				.uri(config.getUri())
+				.headers(headers -> headers.setBearerAuth(jwt.getTokenValue()))
+				.retrieve()
+				.bodyToMono(ServiceCallResponse.class)
+				.block()
+				;
+	}
+	
+	
+
+}

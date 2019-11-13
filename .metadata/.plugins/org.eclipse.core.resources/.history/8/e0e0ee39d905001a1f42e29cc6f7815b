@@ -1,0 +1,27 @@
+package com.developer.ui;
+
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+
+abstract class AbstractFlowController {
+
+	protected static final String FLOW_TYPE_PARAMETER = "flowType";
+	private final WebClient webClient;
+	private final ServicesConfig servicesConfig;
+
+	protected AbstractFlowController(WebClient webClient, ServicesConfig servicesConfig) {
+		this.webClient = webClient;
+		this.servicesConfig = servicesConfig;
+	}
+
+	protected ServiceCallResponse callService(String serviceId, OAuth2AuthorizedClient authorizedClient) {
+
+		return callService(serviceId, authorizedClient, new LinkedMultiValueMap<>());
+	}
+
+	protected ServiceCallResponse callService(String serviceId, OAuth2AuthorizedClient authorizedClient,
+			MultiValueMap<String, String> params) {
+
+	}
+
+}

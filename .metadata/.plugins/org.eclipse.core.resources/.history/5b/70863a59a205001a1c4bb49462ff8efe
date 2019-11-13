@@ -1,0 +1,40 @@
+package com.developer.ui;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
+import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
+import org.springframework.security.oauth2.core.oidc.user.OidcUser;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ModelAttribute;
+
+@ControllerAdvice
+public class DefaultControllerAdvice {
+	
+	private ClientRegistrationRepository clientRegistrationRepository;
+	private OAuth2AuthorizedClientService authorizedClientService;
+	
+	@Autowired
+	public DefaultControllerAdvice(ClientRegistrationRepository clientRegistrationRepository,
+			OAuth2AuthorizedClientService authorizedClientService) {
+		this.clientRegistrationRepository = clientRegistrationRepository;
+		this.authorizedClientService = authorizedClientService;
+	}
+	
+	@ModelAttribute("currentUser")
+	UserModel currentUser(OAuth2AuthenticationToken token) {
+		
+		UserModel userModel = new UserModel();
+		if(token != null) {
+			OidcUser oidcUser = (OidcUser) token.getPrincipal();
+			userModel.setUserId(oidcUser.getSubject());
+			userModel.setFirstName(oidcUser.getGivenName());
+			userModel.setLastName(oidcUser.getFamilyName());
+			userModel.setEmail(oidcUser.getEmail());
+		}
+		
+	}
+	
+	
+
+}

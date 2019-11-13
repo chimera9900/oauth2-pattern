@@ -1,0 +1,30 @@
+
+server:
+  port: 9001
+  
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/uaa/oauth/token  
+
+      client:
+        registration:
+          client-c:
+           provider: uaa
+           client-id: client-c
+           client-secret: secret
+           authorization-grant-type: client_credentials
+           scope: authority-c
+        provider:
+          uaa:
+            issuer-uri: http://localhost:8090/uaa/oauth/token
+
+oauth2:
+ resource:
+  services:
+   service-c:
+    uri: http://localhost:9002/service-c
+              
+                  

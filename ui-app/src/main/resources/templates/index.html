@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>OAuth 2.0 Flows</title>
+        <link rel="icon" type="image/x-icon" href="/assets/img/favicon.ico" th:href="@{/assets/img/favicon.ico}"/>
+        <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.css" th:href="@{/webjars/bootstrap/css/bootstrap.css}" />
+    </head>
+    <body>
+        <div th:replace="templates::header"></div>
+        <div class="container">
+            <div class="page-header">
+                <div style="float:right;">
+                    <a target="_blank" th:href="@{https://github.com/jgrandja/oauth2-protocol-patterns}">
+                        <img th:src="@{/assets/img/github.png}">
+                    </a>
+                </div>
+                <h1>OAuth 2.0 Flows <small>with Spring Security 5</small></h1>
+            </div>
+            <div th:if="${#bools.isFalse(flowActive)}">
+                <span th:replace="templates::flowA"></span>
+                <span th:replace="templates::flowAB"></span>
+                <span th:replace="templates::flowABCTokenRelay"></span>
+                <span th:replace="templates::flowABCTokenExchange"></span>
+                <span th:replace="templates::flowABCClientCredentials"></span>
+            </div>
+            <div th:if="${#bools.isTrue(flowActive)}">
+                <span th:if="${flowACall}">
+                    <span th:replace="templates::flowA"></span>
+                </span>
+                <span th:if="${flowABCall}">
+                    <span th:replace="templates::flowAB"></span>
+                </span>
+                <span th:if="${flowABCCall_token_relay}">
+                    <span th:replace="templates::flowABCTokenRelay"></span>
+                </span>
+                <span th:if="${flowABCCall_token_exchange}">
+                    <span th:replace="templates::flowABCTokenExchange"></span>
+                </span>
+                <span th:if="${flowABCCall_client_credentials}">
+                    <span th:replace="templates::flowABCClientCredentials"></span>
+                </span>
+            </div>
+        </div>
+        <br />
+        <div th:replace="templates::footer"></div>
+        <script src="/webjars/jquery/jquery.min.js" th:src="@{/webjars/jquery/jquery.min.js}"></script>
+        <script src="/webjars/bootstrap/js/bootstrap.min.js" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+    </body>
+</html>

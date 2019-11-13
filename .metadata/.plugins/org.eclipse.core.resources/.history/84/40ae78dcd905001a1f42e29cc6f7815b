@@ -1,0 +1,17 @@
+package com.developer.ui;
+
+import org.springframework.web.reactive.function.client.WebClient;
+
+abstract class AbstractFlowController {
+	protected String flowType;
+	private ServicesConfig servicesConfig;
+	private WebClient webClient;
+	
+	public AbstractFlowController(ServicesConfig servicesConfig, WebClient webClient) {
+		this.servicesConfig = servicesConfig;
+		this.webClient = webClient;
+	}
+	
+	
+
+}

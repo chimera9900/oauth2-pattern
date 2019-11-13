@@ -1,0 +1,8 @@
+package com.developer.b;
+
+import org.springframework.boot.context.properties.ConfigurationProperties;
+
+@ConfigurationProperties("oauth2.resource")
+public class ServicesConfig {
+
+}

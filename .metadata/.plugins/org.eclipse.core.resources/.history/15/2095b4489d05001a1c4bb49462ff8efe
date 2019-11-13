@@ -1,0 +1,10 @@
+package com.developer.ui;
+
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class WebClientConfig {
+	
+	public WebClient webClient
+
+}

@@ -1,0 +1,31 @@
+package com.developer.ui;
+
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.reactive.function.client.WebClient;
+
+abstract class AbstractFlowController {
+	protected String flowType;
+	private ServicesConfig servicesConfig;
+	private WebClient webClient;
+	
+	public AbstractFlowController(ServicesConfig servicesConfig, WebClient webClient) {
+		this.servicesConfig = servicesConfig;
+		this.webClient = webClient;
+	}
+	
+	protected ServiceCallResponse callService(String serviceId, 
+			OAuth2AuthorizedClient authorizedClient ) {
+		return callService(serviceId, authorizedClient, new LinkedMultiValueMap<>());
+	}
+	
+	protected ServiceCallResponse callService(String serviceId, 
+			OAuth2AuthorizedClient authorizedClient, MultiValueMap<String, String> params
+			) {
+		
+	}
+	
+	
+
+}

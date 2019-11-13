@@ -1,0 +1,22 @@
+package com.developer.a;
+
+@RestController
+@RequestMapping("/service-a")
+public class ServiceAController {
+	private static final String SERVICE_A = "service-a";
+
+	@GetMapping
+	public ServiceCallResponse serviceA(JwtAuthenticationToken jwtAuthentication,
+										HttpServletRequest request) {
+		ServiceCallResponse serviceCallResponse = new ServiceCallResponse();
+		serviceCallResponse.setServiceName(SERVICE_A);
+		serviceCallResponse.setServiceUri(request.getRequestURL().toString());
+		serviceCallResponse.setJti(jwtAuthentication.getToken().getId());
+		serviceCallResponse.setSub(jwtAuthentication.getToken().getSubject());
+		serviceCallResponse.setAud(jwtAuthentication.getToken().getAudience());
+		serviceCallResponse.setAuthorities(jwtAuthentication.getAuthorities().stream()
+				.map(GrantedAuthority::getAuthority).sorted().collect(Collectors.toList()));
+
+		return serviceCallResponse;
+	}
+}

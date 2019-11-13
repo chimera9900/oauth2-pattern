@@ -1,0 +1,47 @@
+package com.developer.ui;
+
+import java.util.Set;
+import java.util.TreeSet;
+
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
+import org.springframework.security.oauth2.core.oidc.OidcScopes;
+
+public class AuthorizedClientModel {
+	
+	private final OAuth2AuthorizedClient authorizedClient;
+
+	public AuthorizedClientModel(OAuth2AuthorizedClient authorizedClient) {
+		this.authorizedClient = authorizedClient;
+	}
+
+	public String getClientId() {
+		return getAuthorizedClient().getClientRegistration().getClientId();
+	}
+
+	public boolean isOidcClient() {
+		return getAuthorizedClient().getAccessToken().getScopes().contains(OidcScopes.OPENID);
+	}
+
+	public String getAuthorizationGrantType() {
+		return getAuthorizedClient().getClientRegistration().getAuthorizationGrantType().getValue();
+	}
+
+	public Set<String> getScopes() {
+		return new TreeSet<>(getAuthorizedClient().getAccessToken().getScopes());
+	}
+
+	public String getAccessTokenValue() {
+		return getAuthorizedClient().getAccessToken().getTokenValue();
+	}
+
+	public String getRefreshTokenValue() {
+		return getAuthorizedClient().getRefreshToken() != null ?
+				getAuthorizedClient().getRefreshToken().getTokenValue() :
+				null;
+	}
+
+	private OAuth2AuthorizedClient getAuthorizedClient() {
+		return this.authorizedClient;
+	}
+
+}

@@ -1,0 +1,27 @@
+server:
+  port: 8090
+  
+logging:
+  level:
+    root: debug
+    org.springfamework.web: debug
+    org.springframework.security: debug
+    org.springframework.security.config.oauth2: debug
+    
+ 
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          login-client:
+            provider: uua
+            client-id: login-client
+            client-secret: secret
+            redirect-uri: "{baseUrl/login/oauth2/code/{registrationId}}"
+            scope: openid,profile,email
+        provider:
+          uaa:
+            issuer-uri: http://localhost:8080/uaa/oauth/token
+            
+            

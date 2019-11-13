@@ -1,0 +1,7 @@
+wget -O $CATALINA_HOME/webapps/uaa.war \
+  https://search.maven.org/remotecontent?filepath=org/cloudfoundry/identity/cloudfoundry-identity-uaa/4.27.0/cloudfoundry-identity-uaa-4.27.0.war
+export UAA_CONFIG_PATH=~/.uaa
+export SPRING_PROFILES="default,h2"
+$CATALINA_HOME/bin/catalina.sh run
+
+
